@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 #{title}: #{event.activity.description}
+  
+  br
+  p #[strong Activity Type:]&nbsp;
+    a(href=event.activity.url) #{event.activity.description}
+  p #[strong Event Date:] #{event.date_of_start_formatted}
+  p #[strong Event starts:] #{event.time_of_start}
+  p #[strong Event ends:] #{event.time_of_end}
+  p #[strong Event status:]&nbsp;
+    if event.is_active
+      span.text-success Active
+    else
+      span.text-danger Not active
+
+  br
+  p #[strong Event Id:]&nbsp;
+    a(href=event.url) #{event._id}
+  
+  p Do you really want to delete this Activity?
+  
+  form(method='POST' action='')
+    div.form-group
+      input#eventid.form-control(type='hidden', name='eventid', required='true', value=event._id )
+
+    button.btn.btn-primary(type='submit') Delete

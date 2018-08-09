@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul.list-unstyled
+    each event in event_list
+      li
+        if event.is_active
+          span.status-indicator.status-indicator__active
+        else
+          span.status-indicator.status-indicator__inactive
+          
+        |  #{event.date_of_start_formatted} - 
+        a(href=event.url) #{event.activity.description} 
+
+    else
+      li There are no events.

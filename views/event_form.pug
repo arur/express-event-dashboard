@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='activity') Activity:
+      select#activity.form-control(type='select', placeholder='Select activity' name='activity' required='true' )
+        for activity in activities
+          if event
+            option(value=activity._id selected=(
+              activity._id.toString()==event.activity._id
+              || activity._id.toString()==event.activity
+              ) ? 'selected' : false
+            ) #{activity.description}
+          else
+            option(value=activity._id) #{activity.description}
+    div.form-group
+      label(for='event_date') Event Date:
+      input#event_date.form-control(type='date', placeholder='YYYY-MM-DD', name='event_date', value=(undefined===event ? '' : moment(event.date_of_start).format('YYYY-MM-DD')), required='true')
+      label(for='start_time') Start Hour:
+      input#start_time.form-control(type='time', placeholder='HH:MM', name='start_time', value=(undefined===event ? '' : moment(event.date_of_start).format('HH:mm')), required='true')
+      label(for='end_time') End Hour:
+      input#end_time.form-control(type='time', placeholder='HH:MM', name='end_time', value=(undefined===event ? '' : moment(event.date_of_end).format('HH:mm')), required='true')
+    div.form-group
+      label(for='is_active') Is active:&nbsp;
+        input#is_active.checkbox-input(type='checkbox', name='is_active', checked=(undefined===event ? false : event.is_active))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    div.alert.alert-danger(style='margin-top: 20px;')
+      ul
+        for error in errors
+          li!= error.msg

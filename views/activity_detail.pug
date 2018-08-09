@@ -1,0 +1,15 @@
+extends layout
+
+block content
+
+  h1 Activity Type: #{activity.description}
+  
+  div(style='margin-left:20px;margin-top:20px')
+    p #[strong Activity Description:] #{activity.description}  
+    p #[strong Activity Id:]&nbsp;
+      a(href=activity.url) #{activity._id}
+  hr
+  p
+    a(href=activity.url+'/delete') Delete Activity
+  p
+    a(href=activity.url+'/update') Update Activity

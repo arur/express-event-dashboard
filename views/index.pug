@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #[em Event Dashboard]. Here events and activities can be managed. To review or create new events or/and activities select corresponding entries from the sidebar.
+  
+  h2 Statistics
+  
+  if error
+    p Error getting dynamic content.
+  else
+    p Overview of the current record status and counts:
+
+    ul.list-group
+      li.list-group-item #[strong Events:]
+          span.badge !{data.event_count}
+      li.list-group-item #[strong Active Events:]
+          span.badge !{data.event_active_count}
+      li.list-group-item #[strong Activities:]
+          span.badge !{data.activity_count}

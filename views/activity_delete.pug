@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 #{title}: #{activity.description}
+  
+  if events_with_activity.length
+    p #[strong Delete the following events before attempting to delete this event.]
+  
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Events
+    
+      ul.list-unstyled
+      each event in events_with_activity
+        li 
+          a(href=event.url) #{event._id}&nbsp;
+          span created #{event.date_of_creation_formatted}
+
+  else
+  
+    p Do you really want to delete this Activity?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#activityid.form-control(type='hidden', name='activityid', required='true', value=activity._id )
+
+      button.btn.btn-primary(type='submit') Delete
